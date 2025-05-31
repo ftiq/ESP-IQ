@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تكامل نظام البصمة ZK مع اشتراكات Odoo 18</title>
+    <style>
+        body {
+            font-family: 'Noto Sans Arabic', 'Segoe UI', Tahoma, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            direction: rtl;
+        }
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+        .header p {
+            margin: 10px 0 0;
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #1e3c72;
+            margin-top: 0;
+            border-bottom: 2px solid #1e3c72;
+            padding-bottom: 10px;
+            font-size: 24px;
+        }
+        .feature-grid {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
+        }
+        .feature-item {
+            flex: 1 0 30%;
+            margin: 15px;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .feature-item h3 {
+            color: #2a5298;
+            margin-top: 0;
+        }
+        .feature-icon {
+            font-size: 40px;
+            color: #1e3c72;
+            margin-bottom: 15px;
+        }
+        .screenshot {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .screenshot img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+        .benefits {
+            list-style-type: none;
+            padding: 0;
+        }
+        .benefits li {
+            padding: 10px 0 10px 35px;
+            position: relative;
+        }
+        .benefits li:before {
+            content: "✓";
+            position: absolute;
+            right: 0;
+            color: #2ecc71;
+            font-weight: bold;
+        }
+        .step {
+            display: flex;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        .step-number {
+            flex: 0 0 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #1e3c72;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-left: 20px;
+        }
+        .step-content {
+            flex: 1;
+        }
+        .step-content h3 {
+            margin-top: 0;
+            color: #1e3c72;
+        }
+        .cta {
+            background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+        .cta h2 {
+            margin-top: 0;
+        }
+        .button {
+            display: inline-block;
+            background-color: white;
+            color: #1e3c72;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>تكامل نظام البصمة ZK مع اشتراكات Odoo 18</h1>
+        <p>أتمتة إدارة صلاحية الوصول بناءً على حالة الاشتراكات</p>
+    </div>
+    
+    <div class="container">
+        <div class="section">
+            <h2>نظرة عامة</h2>
+            <p>
+                يهدف هذا المديول إلى ربط نظام البصمة ZK-Teco بمنصة Odoo 18 Enterprise لإدارة صلاحية الوصول بناءً على حالة الاشتراكات. يتم تعطيل بصمة العميل تلقائيًا عند انتهاء الاشتراك، وإعادة تفعيلها عند التجديد، عبر آلية تزامن تعتمد على معرّف العميل الفريد.
+            </p>
+            <div class="screenshot">
+                <img src="banner.png" alt="نظرة عامة على المديول">
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>المميزات الرئيسية</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🔄</div>
+                    <h3>مزامنة تلقائية</h3>
+                    <p>تزامن تلقائي لحالة البصمة مع حالة الاشتراك عند التجديد أو الانتهاء</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🚫</div>
+                    <h3>تعطيل تلقائي</h3>
+                    <p>تعطيل بصمات العملاء تلقائيًا عند انتهاء الاشتراك</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✅</div>
+                    <h3>تفعيل تلقائي</h3>
+                    <p>إعادة تفعيل البصمات تلقائيًا عند تجديد الاشتراك</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🖥️</div>
+                    <h3>إدارة الأجهزة</h3>
+                    <p>لوحة تحكم مركزية لإدارة أجهزة البصمة وحالة اتصالها</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔒</div>
+                    <h3>أمان متكامل</h3>
+                    <p>دعم لبروتوكول HTTPS وإدارة متكاملة للأمان</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <h3>تقارير</h3>
+                    <p>سجل مفصل لعمليات تفعيل وتعطيل البصمات</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>كيف يعمل المديول؟</h2>
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>إعداد أجهزة البصمة</h3>
+                    <p>قم بإضافة أجهزة البصمة ZK-Teco إلى النظام مع تحديد عنوان IP ورقم المنفذ ومعلومات الاتصال الأخرى.</p>
+                    <div class="screenshot">
+                        <img src="device_setup.png" alt="إعداد أجهزة البصمة">
+                    </div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>ربط العملاء بمعرفات البصمة</h3>
+                    <p>أدخل معرّف البصمة الخاص بكل عميل في بطاقة العميل في نظام Odoo.</p>
+                    <div class="screenshot">
+                        <img src="client_fingerprint.png" alt="ربط العملاء بمعرفات البصمة">
+                    </div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>المراقبة التلقائية للاشتراكات</h3>
+                    <p>يقوم النظام تلقائيًا بمراقبة حالة الاشتراكات وتحديث حالة البصمات وفقًا لذلك.</p>
+                    <div class="screenshot">
+                        <img src="subscription_monitoring.png" alt="المراقبة التلقائية للاشتراكات">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>الفوائد الرئيسية</h2>
+            <ul class="benefits">
+                <li>توفير الوقت من خلال أتمتة عمليات تفعيل وتعطيل البصمات</li>
+                <li>تحسين تجربة العملاء من خلال تفعيل البصمات تلقائيًا عند تجديد الاشتراك</li>
+                <li>تقليل الأخطاء البشرية في إدارة الوصول</li>
+                <li>تحسين الأمان من خلال تعطيل البصمات فورًا عند انتهاء الاشتراك</li>
+                <li>سهولة إدارة أجهزة البصمة المتعددة من مكان واحد</li>
+                <li>تكامل سلس مع نظام الاشتراكات في Odoo 18</li>
+            </ul>
+        </div>
+        
+        <div class="cta">
+            <h2>جاهز للبدء؟</h2>
+            <p>قم بتثبيت المديول اليوم وابدأ في أتمتة إدارة الوصول لعملائك!</p>
+            <a href="#" class="button">تثبيت المديول</a>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 تكامل نظام البصمة ZK مع اشتراكات Odoo 18. جميع الحقوق محفوظة.</p>
+    </footer>
+</body>
+</html>
