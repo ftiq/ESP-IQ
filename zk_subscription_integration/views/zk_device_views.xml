@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- شكل قائمة أجهزة البصمة -->
+    <record id="view_zk_device_list" model="ir.ui.view">
+        <field name="name">zk.device.list</field>
+        <field name="model">zk.device</field>
+        <field name="arch" type="xml">
+            <list string="أجهزة البصمة">
+                <field name="name"/>
+                <field name="ip_address"/>
+                <field name="port"/>
+                <field name="connection_status" decoration-success="connection_status == 'connected'" decoration-danger="connection_status == 'disconnected'"/>
+                <field name="last_sync"/>
+                <field name="location"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- شكل بطاقة الجهاز -->
+    <record id="view_zk_device_form" model="ir.ui.view">
+        <field name="name">zk.device.form</field>
+        <field name="model">zk.device</field>
+        <field name="arch" type="xml">
+            <form string="جهاز البصمة">
+                <header>
+                    <button name="test_connection" string="اختبار الاتصال" type="object" class="oe_highlight"/>
+                    <button name="sync_all_users" string="مزامنة المستخدمين" type="object" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" placeholder="اسم الجهاز"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="ip_address"/>
+                            <field name="port"/>
+                            <field name="protocol"/>
+                            <field name="time_out"/>
+                            <field name="password" password="True"/>
+                            <field name="ommit_ping"/>
+                        </group>
+                        <group>
+                            <field name="location"/>
+                            <field name="device_model"/>
+                            <field name="device_serial"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="connection_status" readonly="1"/>
+                        <field name="last_sync" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- بحث الأجهزة -->
+    <record id="view_zk_device_search" model="ir.ui.view">
+        <field name="name">zk.device.search</field>
+        <field name="model">zk.device</field>
+        <field name="arch" type="xml">
+            <search string="بحث أجهزة البصمة">
+                <field name="name"/>
+                <field name="ip_address"/>
+                <field name="location"/>
+                <filter string="متصل" name="connected" domain="[('connection_status', '=', 'connected')]"/>
+                <filter string="غير متصل" name="disconnected" domain="[('connection_status', '=', 'disconnected')]"/>
+                <filter string="نشط" name="active" domain="[('active', '=', True)]"/>
+                <filter string="غير نشط" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="تجميع حسب">
+                    <filter string="الموقع" name="group_by_location" domain="[]" context="{'group_by': 'location'}"/>
+                    <filter string="حالة الاتصال" name="group_by_status" domain="[]" context="{'group_by': 'connection_status'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- إجراء عرض الأجهزة -->
+    <record id="action_zk_device" model="ir.actions.act_window">
+        <field name="name">أجهزة البصمة</field>
+        <field name="res_model">zk.device</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_zk_device_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                قم بإضافة أول جهاز بصمة
+            </p>
+            <p>
+                قم بإضافة أجهزة البصمة لتسهيل إدارة وصول العملاء بناءً على حالة اشتراكاتهم.
+            </p>
+        </field>
+    </record>
+
+    <!-- إضافة عنصر قائمة -->
+    <menuitem id="menu_zk_device"
+              name="أجهزة البصمة"
+              parent="sale_subscription.menu_sale_subscription_root"
+              action="action_zk_device"
+              sequence="20"/>
+</odoo>

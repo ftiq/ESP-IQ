@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- إجراء مجدول للتحقق من اتصال أجهزة البصمة كل ساعة -->
+        <record id="ir_cron_check_zk_connection" model="ir.cron">
+            <field name="name">التحقق من اتصال أجهزة البصمة</field>
+            <field name="model_id" ref="model_zk_device"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_check_connection()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            
+            <field name="user_id" ref="base.user_root"/>
+            <field name="active" eval="True"/>
+        </record>
+        
+        <!-- إجراء مجدول لمزامنة البصمات مع حالة الاشتراكات كل 6 ساعات -->
+        <record id="ir_cron_sync_fingerprints_with_subscriptions" model="ir.cron">
+            <field name="name">مزامنة البصمات مع حالة الاشتراكات</field>
+            <field name="model_id" ref="model_zk_device"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_sync_fingerprints_with_subscriptions()</field>
+            <field name="interval_number">6</field>
+            <field name="interval_type">hours</field>
+            
+            <field name="user_id" ref="base.user_root"/>
+            <field name="active" eval="True"/>
+        </record>
+        
+        <!-- إجراء مجدول يومي للتحقق من الاشتراكات المنتهية وتعطيل البصمات -->
+        <record id="ir_cron_check_expired_subscriptions" model="ir.cron">
+            <field name="name">تعطيل بصمات العملاء للاشتراكات المنتهية</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="state">code</field>
+            <field name="code">model.check_expired_subscriptions()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            
+            <field name="user_id" ref="base.user_root"/>
+            <field name="active" eval="True"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- إضافة حقول البصمة إلى نموذج العميل -->
+    <record id="view_partner_form_zk_biometric" model="ir.ui.view">
+        <field name="name">res.partner.form.zk.biometric</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="بصمة ZK" invisible="is_company">
+                    <group>
+                        <field name="zk_biometric_id"/>
+                        <field name="zk_status"/>
+                        <field name="has_active_subscription" readonly="1"/>
+                    </group>
+                    <group>
+                        <button name="action_enable_zk_biometric" 
+                                string="تفعيل البصمة" 
+                                type="object" 
+                                class="oe_highlight" 
+                                invisible="zk_status == 'active'"/>
+                        <button name="action_disable_zk_biometric" 
+                                string="تعطيل البصمة" 
+                                type="object" 
+                                class="oe_link" 
+                                invisible="zk_status == 'disabled'"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- إضافة فلتر للبحث عن العملاء بحسب حالة البصمة -->
+    <record id="view_res_partner_filter_zk" model="ir.ui.view">
+        <field name="name">res.partner.select.zk</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='inactive']" position="after">
+                <separator/>
+                <filter string="بصمة مفعلة" name="zk_active" domain="[('zk_status', '=', 'active')]"/>
+                <filter string="بصمة معطلة" name="zk_disabled" domain="[('zk_status', '=', 'disabled')]"/>
+                <filter string="لديه بصمة" name="has_zk" domain="[('zk_biometric_id', '!=', False)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
