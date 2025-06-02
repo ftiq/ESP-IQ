@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_partner_form_inherit_registration" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.registration</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="contacts.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="استمارات التسجيل">
+                    <field name="player_registration_ids">
+                        <tree string="قائمة استمارات التسجيل">
+                            <field name="first_name"/>
+                            <field name="nickname"/>
+                            <field name="birth_date"/>
+                            <field name="phone_number"/>
+                            <field name="weight"/>
+                            <field name="height"/>
+                        </tree>
+                        <form string="تفاصيل استمارة التسجيل">
+                            <sheet>
+                                <group>
+                                    <field name="partner_id" readonly="1"/>
+                                    <field name="first_name"/>
+                                    <field name="nickname"/>
+                                    <field name="mother_name"/>
+                                    <field name="birth_date"/>
+                                    <field name="address"/>
+                                    <field name="phone_number"/>
+                                    <field name="weight"/>
+                                    <field name="height"/>
+                                    <field name="visible_marks"/>
+                                    <field name="photo_player" widget="image"/>
+                                </group>
+                                <separator string="التعهد الخطي" colspan="4"/>
+                                <group>
+                                    <field name="commitment_text" nolabel="1"/>
+                                    <group>
+                                        <field name="parent_name"/>
+                                        <field name="parent_signature" widget="image"/>
+                                        <field name="parent_date"/>
+                                    </group>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_player_registration_form" model="ir.ui.view">
+        <field name="name">academy.player.registration.form</field>
+        <field name="model">academy.player.registration</field>
+        <field name="arch" type="xml">
+            <form string="استمارة تسجيل لاعبي الأكاديمية">
+                <sheet>
+                    <group>
+                        <field name="partner_id"/>
+                        <field name="first_name"/>
+                        <field name="nickname"/>
+                        <field name="mother_name"/>
+                        <field name="birth_date"/>
+                        <field name="address"/>
+                        <field name="phone_number"/>
+                        <field name="weight"/>
+                        <field name="height"/>
+                        <field name="visible_marks"/>
+                        <field name="photo_player" widget="image"/>
+                    </group>
+                    <separator string="التعهد الخطي" colspan="4"/>
+                    <group>
+                        <field name="commitment_text" nolabel="1"/>
+                        <group>
+                            <field name="parent_name"/>
+                            <field name="parent_signature" widget="image"/>
+                            <field name="parent_date"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_player_registration_tree" model="ir.ui.view">
+        <field name="name">academy.player.registration.tree</field>
+        <field name="model">academy.player.registration</field>
+        <field name="arch" type="xml">
+            <tree string="قائمة استمارات التسجيل">
+                <field name="partner_id"/>
+                <field name="first_name"/>
+                <field name="nickname"/>
+                <field name="birth_date"/>
+                <field name="phone_number"/>
+                <field name="weight"/>
+                <field name="height"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_player_registration" model="ir.actions.act_window">
+        <field name="name">استمارة تسجيل اللاعب</field>
+        <field name="res_model">academy.player.registration</field>>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_academy_root" name="Academy"/>
+
+    <menuitem id="menu_player_registration"
+              name="استمارة التسجيل"
+              parent="menu_academy_root"
+              action="action_player_registration"
+              sequence="10"/>
+</odoo>
