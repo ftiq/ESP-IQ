@@ -1,0 +1,164 @@
+<odoo>
+    <template id="report_registration_document">
+        <t t-call="web.basic_layout">
+            <div class="page" dir="rtl" style="font-family: 'Arial', sans-serif; position: relative;">
+                <style>
+                    .field-line {
+                        display: inline-block;
+                        border-bottom: 1px dotted #000;
+                        vertical-align: bottom;
+                        height: 1em;
+                    }
+                </style>
+
+                <div style="
+                    position: absolute;
+                    top: 150px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    opacity: 0.1;
+                    z-index: 0;
+                ">
+                    <img t-att-src="'/partner_player_reordered/static/src/img/rcd_watermark.png'" 
+                         style="width: 500px;"/>
+                </div>
+                <div style="position: relative; z-index: 1; margin-bottom: 20px;">
+                    <div style="float: left;">
+                        <img t-att-src="'/partner_player_reordered/static/src/img/rcd_logo.png'" 
+                             style="max-height: 60px;"/>
+                    </div>
+                    <div style="text-align: center; margin-top: 10px;">
+                        <h3 style="margin: 0; font-size: 18px;">استمارة تسجيل</h3>
+                        <h4 style="margin: 0; font-size: 16px; margin-top: 4px;">أكاديمية نادي إسبانيول</h4>
+                    </div>
+                    <div style="clear: both;"></div>
+                    <div style="border-top: 1px solid #000; margin-top: 8px;"></div>
+                </div>
+                <div style="position: relative; z-index: 1; margin-top: 10px;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <td style="width: 25%; vertical-align: top; padding: 0 10px;">
+                                <div style="
+                                    width: 120px; 
+                                    height: 120px; 
+                                    border: 1px solid #000; 
+                                    text-align: center;
+                                    line-height: 120px;
+                                    font-size: 14px;
+                                    direction: rtl;
+                                ">
+                                    صورة<br/>اللاعب
+                                </div>
+                            </td>
+                            <td style="width: 75%; vertical-align: top; padding: 0 10px;">
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    <tr>
+                                        <td style="padding: 6px 4px; font-weight: bold; width: 20%;">الاسم الثلاثي:</td>
+                                        <td style="padding: 6px 4px;">
+                                            <span class="field-line" t-esc="doc.name or ''"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 6px 4px; font-weight: bold;">اللقب:</td>
+                                        <td style="padding: 6px 4px;">
+                                            <span class="field-line" t-esc="doc.name or ''"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 6px 4px; font-weight: bold;">اسم الأم:</td>
+                                        <td style="padding: 6px 4px;">
+                                            <span class="field-line" t-esc="doc.mother_name or ''"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 6px 4px; font-weight: bold;">تاريخ الميلاد:</td>
+                                        <td style="padding: 6px 4px;">
+                                            <span class="field-line" style="width: 150px;" 
+                                                  t-esc="doc.birth_date and doc.birth_date.strftime('%d') or ''"></span> /
+                                            <span class="field-line" style="width: 50px;" 
+                                                  t-esc="doc.birth_date and doc.birth_date.strftime('%m') or ''"></span> /
+                                            <span class="field-line" style="width: 60px;" 
+                                                  t-esc="doc.birth_date and doc.birth_date.strftime('%Y') or ''"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 6px 4px; font-weight: bold;">العنوان:</td>
+                                        <td style="padding: 6px 4px;">
+                                            <span class="field-line" 
+                                                  t-esc="(doc.street or '') + ' ' + (doc.city or '')"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 6px 4px; font-weight: bold;">رقم الهاتف:</td>
+                                        <td style="padding: 6px 4px;">
+                                            <span class="field-line" t-esc="doc.phone or ''"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 6px 4px; font-weight: bold;">الوزن:</td>
+                                        <td style="padding: 6px 4px;">
+                                            <span class="field-line" style="width: 80px;" 
+                                                  t-esc="doc.weight or ''"></span> كغم
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 6px 4px; font-weight: bold;">الطول:</td>
+                                        <td style="padding: 6px 4px;">
+                                            <span class="field-line" style="width: 80px;" 
+                                                  t-esc="doc.height or ''"></span> سم
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 6px 4px; font-weight: bold;">العلامات الظاهرة:</td>
+                                        <td style="padding: 6px 4px;">
+                                            <span class="field-line" t-esc="doc.visible_marks or ''"></span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="position: relative; z-index: 1; margin: 20px 0;">
+                    <div style="border-top: 1px solid #000;"></div>
+                </div>
+                <div style="position: relative; z-index: 1; padding: 0 10px;">
+                    <h4 style="margin: 0 0 8px 0; font-size: 16px; text-align: right;">تعهد خطي</h4>
+                    <p style="margin: 4px 0; font-size: 14px;">
+                        أنا: 
+                        <span class="field-line" style="width: 200px;" t-esc="doc.parent_id.name or ''"></span>  
+                        ولي أمر اللاعب:
+                    </p>
+                    <p style="margin: 12px 0; font-size: 14px;">
+                        أتعهد بسلامة اللاعب البنّية والبدنية وهو مؤهّل للعب، وبذلك أوافق على اشتراكه بأكاديمية نادي
+                        إسبانيول وبأنني مسؤول عن أي إصابات قد يتعرّض لها اللاعب أثناء التدريبات أو المباريات.
+                    </p>
+                    <table style="width: 100%; margin-top: 20px; border-collapse: collapse;">
+                        <tr>
+                            <td style="width: 30%; padding: 4px; font-weight: bold;">التوقيع:</td>
+                            <td style="width: 40%; padding: 4px;">
+                                <span class="field-line" style="width: 100%;"></span>
+                            </td>
+                            <td style="width: 15%; padding: 4px; font-weight: bold; text-align: right;">التاريخ:</td>
+                            <td style="width: 15%; padding: 4px;">
+                                <span class="field-line" style="width: 80px;"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px; font-weight: bold;">اسم ولي الأمر:</td>
+                            <td style="padding: 4px;">
+                                <span class="field-line" style="width: 100%;"></span>
+                            </td>
+                            <td style="padding: 4px; font-weight: bold; text-align: right;">/ /</td>
+                            <td style="padding: 4px;">
+                                <span class="field-line" style="width: 60px;"></span> / 
+                                <span class="field-line" style="width: 60px;"></span> / 
+                                <span class="field-line" style="width: 60px;"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
