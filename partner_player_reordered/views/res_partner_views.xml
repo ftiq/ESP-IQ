@@ -1,5 +1,5 @@
 <odoo>
-    <record id="res_partner_view_form_inherit_player" model="ir.ui.view">
+    <button name="%(partner_player_reordered.action_report_res_partner_registration)d" ... />
         <field name="name">res.partner.form.inherit.player</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
