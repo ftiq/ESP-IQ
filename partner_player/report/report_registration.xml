@@ -1,0 +1,12 @@
+<odoo>
+    <report
+        id="action_report_res_partner_registration"
+        model="res.partner"
+        string="طباعة استمارة تسجيل اللاعب"
+        report_type="qweb-pdf"
+        name="partner_player.report_registration_document"
+        file="partner_player.report_registration_document"
+        attachment="False"
+        print_report_name="'استمارة التسجيل - %s' % (object.name)"
+    />
+</odoo>
