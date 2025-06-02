@@ -2,6 +2,16 @@
     <template id="report_registration_document">
         <t t-call="web.basic_layout">
             <div class="page" dir="rtl" style="font-family: 'Arial', sans-serif; position: relative;">
+                <!-- نقل تعريف أنماط CSS هنا بدلاً من قالب منفصل -->
+                <style>
+                    .field-line {
+                        display: inline-block;
+                        border-bottom: 1px dotted #000;
+                        vertical-align: bottom;
+                        height: 1em;
+                    }
+                </style>
+
                 <div style="
                     position: absolute;
                     top: 150px;
@@ -151,17 +161,5 @@
                 </div>
             </div>
         </t>
-    </template>
-    <template id="report_registration_styles" inherit_id="web.basic_layout">
-        <xpath expr="//head" position="inside">
-            <style>
-                .field-line {
-                    display: inline-block;
-                    border-bottom: 1px dotted #000;
-                    vertical-align: bottom;
-                    height: 1em;
-                }
-            </style>
-        </xpath>
     </template>
 </odoo>
